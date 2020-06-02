@@ -19,3 +19,5 @@ phases:
       - echo Pushing the Docker image...
       - docker ps
       - docker push 239144702963.dkr.ecr.us-west-2.amazonaws.com/cicddemo
+  proxy:
+    upload-artifacts: yes
