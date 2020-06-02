@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - pwd
+      - $(chmod +x pipeline/codedeploy/*.sh)
+      - pipeline/codedeploy/preq.sh
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region us-east-2) 
+  build:
+    commands:
+      - echo Build started on `date`
+      - pipeline/codedeploy/build_image.sh      
+      
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker ps
+      - docker push 239144702963.dkr.ecr.us-west-2.amazonaws.com/cicddemo
