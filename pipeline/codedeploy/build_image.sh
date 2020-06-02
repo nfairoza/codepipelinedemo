@@ -10,5 +10,6 @@ TAG=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')
 export TAG=$TAG
 docker ps
 docker images
+docker pull $IMAGE_NAME
 docker build -f pipeline/dockerimage/Dockerfile -t $IMAGE_NAME:latest .
 docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG

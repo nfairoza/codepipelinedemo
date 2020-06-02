@@ -7,7 +7,7 @@ phases:
       - $(chmod +x pipeline/codedeploy/*.sh)
       - pipeline/codedeploy/preq.sh
       - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region us-east-2) 
+      - $(aws ecr get-login --no-include-email --region us-west-2) 
   build:
     commands:
       - echo Build started on `date`
