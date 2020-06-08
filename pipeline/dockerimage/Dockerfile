@@ -1,5 +1,5 @@
 # Replace with your ECR repo URI
-FROM 239144702963.dkr.ecr.us-west-2.amazonaws.com/cicddemo:ph4z4GV1H3VjB
+FROM 239144702963.dkr.ecr.us-west-2.amazonaws.com/cicddemo:FbIRVTQ8W3W16
 RUN chmod +x /usr/bin
 RUN rm -r /var/www/html/codepipelinedemo
 RUN ls ../
