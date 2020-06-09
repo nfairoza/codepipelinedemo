@@ -6,6 +6,5 @@ COPY website /var/www/html/codepipelinedemo/website
 RUN chmod +x /var/www/html/codepipelinedemo -R
 EXPOSE 80
 RUN /etc/init.d/apache2 start
-
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
 
