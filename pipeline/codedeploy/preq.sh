@@ -1,5 +1,5 @@
 #!/bin/bash
-
+yum install curl -y
 AWS_ACCOUNT_ID="$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .accountId)"
 echo  ********************************* Installed apt preqs  *********************************
 curl -fsSL https://get.docker.com -o get-docker.sh
