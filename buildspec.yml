@@ -16,8 +16,8 @@ phases:
     commands:
       - echo Pushing the Docker image...
       - docker ps
-      - docker push 239144702963.dkr.ecr.AWS_REGION.amazonaws.com/cicddemo
-      - printf '[{"name":"bandappcontainer","imageUri":"%s"}]' 239144702963.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo:latest > imagedefinitions.json
+      - docker push $CODEBUILD_WEBHOOK_ACTOR_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo
+      - printf '[{"name":"bandappcontainer","imageUri":"%s"}]' $CODEBUILD_WEBHOOK_ACTOR_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo:latest > imagedefinitions.json
       # - printf '[{"name":"bandappcontainer","imageUri":"%s"}]' 239144702963.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo:latest > imagedefinitions.json
       - echo Build completed on `date`
 
