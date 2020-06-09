@@ -9,10 +9,8 @@ RUN /etc/init.d/apache2 start
 
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
 
-
 # RUN /etc/init.d/apache2 start
 # RUN /etc/init.d/apache2 restart
-
 # CMD /usr/sbin/apache2ctl -D FOREGROUND
 
 
