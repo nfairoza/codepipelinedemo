@@ -3,13 +3,16 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - export AWS_ACCOUNT_ID="$(aws sts get-caller-identity | jq -r .Account)"
+      - export REPO_NAME=cicddemo
+      - export CONTAINER_NAME=bandappcontainer
       - $(chmod +x pipeline/codedeploy/*.sh)
       - pipeline/codedeploy/preq.sh
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_REGION) 
       - aws sts get-caller-identity | jq -r .Account
-      - export AWS_ACCOUNT_ID="$(aws sts get-caller-identity | jq -r .Account)"
-      # - echo "AWS_ACCOUNT_ID=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .accountId)" >>  /etc/environment
+      
+
 
   build:
     commands:
@@ -20,9 +23,8 @@ phases:
     commands:
       - echo Pushing the Docker image...
       - echo $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo
-      - printf '[{"name":"bandappcontainer","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo:latest > imagedefinitions.json
-      # - printf '[{"name":"bandappcontainer","imageUri":"%s"}]' 239144702963.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo:latest > imagedefinitions.json
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME
+      - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME:latest > imagedefinitions.json
       - echo Build completed on `date`
 
 artifacts:
