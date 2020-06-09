@@ -8,8 +8,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_REGION) 
       # - export AWS_ACCOUNT_ID="$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .accountId)"
-      - echo "export AWS_ACCOUNT_ID=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .accountId)" >> ~/.bash_profile && \
-      - source ~/.bash_profile
+      - echo "AWS_ACCOUNT_ID=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .accountId)" >>  /etc/environment
       - echo AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID
   build:
     commands:
