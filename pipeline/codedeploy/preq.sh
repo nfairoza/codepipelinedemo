@@ -1,16 +1,16 @@
 #!/bin/bash
-yum update
-yum install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common \
-    unzip \
-    apt-utils \
-    jq \
-    python-minimal \
-    systemd
-yum install jq -y
+# yum update
+# yum install -y \
+#     apt-transport-https \
+#     ca-certificates \
+#     curl \
+#     software-properties-common \
+#     unzip \
+#     apt-utils \
+#     jq \
+#     python-minimal \
+#     systemd
+# yum install jq -y
 echo  ********************************* Installed apt preqs  *********************************
 curl -fsSL https://get.docker.com -o get-docker.sh
 bash get-docker.sh
@@ -27,12 +27,12 @@ docker ps
 service docker start
 docker images
 echo  ********************************* Setup Env vairiables *********************************
-ACCOUNT_ID="$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .accountId)"
-REGION=$(curl -sq http://169.254.169.254/latest/meta-data/placement/availability-zone/)
-REGION=${REGION: :-1}
-export ACCOUNT_ID=$ACCOUNT_ID
-export REGION=$REGION
-echo "REGION=$REGION" >> /etc/bashrc
-echo "ACCOUNT_ID=$ACCOUNT_ID" >> /etc/bashrc
-source /etc/bashrc
+# ACCOUNT_ID="$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .accountId)"
+# REGION=$(curl -sq http://169.254.169.254/latest/meta-data/placement/availability-zone/)
+# REGION=${REGION: :-1}
+# export ACCOUNT_ID=$ACCOUNT_ID
+# export REGION=$REGION
+# echo "REGION=$REGION" >> /etc/bashrc
+# echo "ACCOUNT_ID=$ACCOUNT_ID" >> /etc/bashrc
+# source /etc/bashrc
 echo  ********************************* End of preq.sh *********************************
