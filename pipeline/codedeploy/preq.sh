@@ -1,6 +1,6 @@
 #!/bin/bash
-apt-get update
-apt-get install -y \
+yum update
+yum install -y \
     apt-transport-https \
     ca-certificates \
     curl \

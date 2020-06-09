@@ -1,9 +1,5 @@
 version: 0.2
-env:
-  variables:
-    ACCOUNT_ID: "$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .accountId)"
-    REPO_NAME: "cicddemo"
-    
+
 phases:
   pre_build:
     commands:
@@ -18,13 +14,14 @@ phases:
       
   post_build:
     commands:
-      - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker ps
-      - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME
-      - printf '[{"name":"bandappcontainer","imageUri":"%s"}]' $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME:latest > imagedefinitions.json
+      - docker push 239144702963.dkr.ecr.AWS_REGION.amazonaws.com/cicddemo
+      - printf '[{"name":"bandappcontainer","imageUri":"%s"}]' 239144702963.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo:latest > imagedefinitions.json
+      # - printf '[{"name":"bandappcontainer","imageUri":"%s"}]' 239144702963.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo:latest > imagedefinitions.json
+      - echo Build completed on `date`
 
 artifacts:
     files: 
       - imagedefinitions.json
-      - appspec.yml
+
