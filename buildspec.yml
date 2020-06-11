@@ -5,7 +5,7 @@ phases:
     commands:
       - export AWS_ACCOUNT_ID="$(aws sts get-caller-identity | jq -r .Account)"
       - export REPO_NAME=cicddemo  #Your ECR repository name
-      - export CONTAINER_NAME=cicdappcontainer    #Your ecs container name
+      - export CONTAINER_NAME=bandappcontainer    #Your ecs container name cicdappcontainer
       - $(chmod +x pipeline/codedeploy/*.sh)
       - pipeline/codedeploy/preq.sh
       - echo Logging in to Amazon ECR...
