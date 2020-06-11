@@ -4,15 +4,13 @@ phases:
   pre_build:
     commands:
       - export AWS_ACCOUNT_ID="$(aws sts get-caller-identity | jq -r .Account)"
-      - export REPO_NAME=cicddemo
-      - export CONTAINER_NAME=bandappcontainer
+      - export REPO_NAME=cicddemo  #Your ECR repository name
+      - export CONTAINER_NAME=cicdappcontainer    #Your ecs container name
       - $(chmod +x pipeline/codedeploy/*.sh)
       - pipeline/codedeploy/preq.sh
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_REGION) 
-      - aws sts get-caller-identity | jq -r .Account
       
-
 
   build:
     commands:
@@ -22,7 +20,7 @@ phases:
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - echo $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/cicddemo
+      - echo Pushing to $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME
       - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO_NAME:latest > imagedefinitions.json
       - echo Build completed on `date`
